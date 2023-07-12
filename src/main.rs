@@ -3,6 +3,7 @@ use std::env;
 
 use reqwest::header;
 
+mod document_list;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let readwise_api_key = env::var("READWISE_API_KEY").ok().unwrap();
     let mut headers = header::HeaderMap::new();
@@ -16,11 +17,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build()
         .unwrap();
     let res = client
-        .get("https://readwise.io/api/v3/list/?location=later")
-        .headers(headers)
+        .get("https://readwise.io/api/v3/list/?location=feed")
+        .headers(headers.clone())
         .send()?
         .text()?;
     println!("{}", res);
+    let result: document_list::Root = client
+        .get("https://readwise.io/api/v3/list/?location=feed")
+        .headers(headers.clone())
+        .send()?
+        .json()?;
+    println!("{:#?}", result);
 
     Ok(())
 }
