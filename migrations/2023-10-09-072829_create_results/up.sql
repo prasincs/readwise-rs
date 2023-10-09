@@ -1,0 +1,21 @@
+CREATE TABLE results (
+    id UUID PRIMARY KEY,
+    url TEXT NOT NULL,
+    source_url TEXT NOT NULL,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    source TEXT,
+    category TEXT NOT NULL,
+    location TEXT NOT NULL,
+    tags JSONB NOT NULL,
+    site_name TEXT,
+    word_count BIGINT,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    notes TEXT NOT NULL,
+    published_date JSONB NOT NULL,
+    summary TEXT,
+    image_url TEXT,
+    parent_id JSONB NOT NULL,
+    reading_progress DOUBLE PRECISION NOT NULL
+);
